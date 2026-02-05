@@ -20,6 +20,8 @@ cd expense-tracker
 
 # Run the application
 ./gradlew bootRun
+
+
 ```
 
 The application will start on `http://localhost:8080`. You can now make API requests to create users and manage expenses.
