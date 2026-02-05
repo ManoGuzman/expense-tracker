@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -jar build/libs/expense-tracker-1.0.0.jar
