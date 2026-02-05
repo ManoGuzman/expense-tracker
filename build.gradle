@@ -49,3 +49,12 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+tasks.named('bootJar') {
+    archiveFileName = 'expense-tracker-1.0.0.jar'
+    enabled = true
+}
+
+tasks.named('jar') {
+    enabled = false
+}
