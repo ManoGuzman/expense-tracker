@@ -54,4 +54,13 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+# Ignore Gradle build output directory
+build
+
+# Ignore Kotlin plugin data
+.kotlin
+
+# Local configuration files
+**/application-local.yml
+
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle
