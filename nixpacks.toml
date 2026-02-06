@@ -5,4 +5,4 @@ nixPkgs = ['jdk17']
 cmds = ['chmod +x ./gradlew', './gradlew clean bootJar --no-daemon']
 
 [start]
-cmd = 'java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar build/libs/expense-tracker-1.0.0.jar'
+cmd = 'java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar build/libs/expense-tracker-*.jar'
