@@ -1,11 +1,10 @@
-# Production Configuration for Railway
 spring:
   application:
     name: expense-tracker
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?createDatabaseIfNotExist=true&useSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:expensedb}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -14,18 +13,18 @@ spring:
     show-sql: ${SHOW_SQL:false}
     properties:
       hibernate:
-        format_sql: false
+        format_sql: true
 
 server:
-  port: ${PORT}
+  port: ${SERVER_PORT:8080}
   servlet:
     context-path: /api
 
 jwt:
-  secret: ${JWT_SECRET}
-  expiration: ${JWT_EXPIRATION}
+  secret: ${JWT_SECRET:404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970}
+  expiration: ${JWT_EXPIRATION:86400000}
 
 logging:
   level:
-    com.expensetracker: INFO
+    com.expensetracker: ${LOG_LEVEL:INFO}
     org.springframework.security: WARN
