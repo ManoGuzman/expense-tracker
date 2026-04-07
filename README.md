@@ -1,201 +1,356 @@
-<img src="https://img.icons8.com/?size=100&id=v3CiDxsgQg3X&format=png&color=000000" alt="Expense Tracker" align="right">
+<a id="readme-top"></a>
 
-# Expense Tracker &middot; [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg?style=flat-square)]() [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen.svg?style=flat-square)](https://spring.io/projects/spring-boot) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/ManoGuzman/expense-tracker/blob/master/LICENSE)
-
-> Track your expenses efficiently with a secure RESTful API
-
-A RESTful API for managing personal expenses with user authentication and authorization. Users can sign up, log in, and manage their own expense records through a complete set of CRUD operations.
-
-## Installing / Getting started
-
-To get the application running locally:
-
-```shell
-# Clone the repository
-git clone https://github.com/ManoGuzman/expense-tracker.git
-cd expense-tracker
-
-# Build the project
-./gradlew build
-
-# Run the application
-./gradlew bootRun
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Java][java-shield]][java-url]
+[![Spring Boot][spring-shield]][spring-url]
 
 
-```
 
-The application will start on `http://localhost:8080`. You can now make API requests to create users and manage expenses.
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/ManoGuzman/expense-tracker-springboot">
+    <img src="https://img.icons8.com/?size=100&id=ArlsSOzBs4a2&format=png&color=000000" alt="Money Logo" width="80" height="80">
+  </a>
 
-## Developing
+  <h3 align="center">Expense Tracker API</h3>
+
+  <p align="center">
+    A RESTful API for tracking personal expenses with user authentication and secure data management.
+    <br />
+    <a href="https://github.com/ManoGuzman/expense-tracker-springboot"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/ManoGuzman/expense-tracker-springboot/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/ManoGuzman/expense-tracker-springboot/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#api-endpoints">API Endpoints</a></li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+A secure RESTful API backend for managing personal expenses. Built with Spring Boot, it provides user authentication via JWT tokens and comprehensive expense management including creation, updates, deletion, and filtering by various date ranges.
+
+### Features
+
+- **User Authentication**: Secure registration and login with JWT tokens
+- **Expense Management**: Full CRUD operations for expenses
+- **Date Filtering**: Filter expenses by week, month, 3 months, or custom date ranges
+- **Category Support**: Organize expenses by predefined categories
+- **Secure**: Password hashing, JWT authentication, and protected endpoints
+- **Production Ready**: Configured for deployment on Railway with MySQL
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 ### Built With
 
-- **Java 17+** - Programming language
-- **Spring Boot 3.x** - Application framework
-- **Spring Security** - Authentication and authorization
-- **Spring Data JPA** - Data persistence with Hibernate
-- **MySQL 8.x** - Relational database
-- **Gradle** - Build tool and dependency management
-- **Hibernate** - ORM framework
+* [![Java][Java]][java-url]
+* [![Spring Boot][Spring Boot]][spring-url]
+* [![Spring Security][Spring Security]][spring-security-url]
+* [![JWT][JWT]][jwt-url]
+* [![MySQL][MySQL]][mysql-url]
+* [![H2 Database][H2]][h2-url]
+* [![Lombok][Lombok]][lombok-url]
+* [![Gradle][Gradle]][gradle-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+Instructions for setting up the project locally.
 
 ### Prerequisites
 
-Before you begin, ensure you have the following installed:
+- Java 17 or higher
+- Gradle (or use the included gradlew wrapper)
+- MySQL 8.0+ (for production) or H2 (for development)
 
-- **JDK 17 or higher** - [Download OpenJDK](https://adoptium.net/)
-- **MySQL 8.x** - [Download MySQL](https://dev.mysql.com/downloads/)
-- **Gradle 7.x+** (or use the included wrapper)
-- **Git** - [Download Git](https://git-scm.com/downloads)
+### Installation
 
-### Setting up Dev
+1. Clone the repository
+   ```sh
+   git clone https://github.com/ManoGuzman/expense-tracker-springboot.git
+   ```
+2. Navigate to the project directory
+   ```sh
+   cd expense-tracker-springboot
+   ```
+3. Configure environment variables or update `application.yml`
 
-Follow these steps to set up your development environment:
+   **For Development (H2 - in-memory):**
+   No configuration needed. The application uses H2 by default.
 
-```shell
-# Clone the repository
-git clone https://github.com/ManoGuzman/expense-tracker.git
-cd expense-tracker
+   **For Production (MySQL):**
+   Set the following environment variables:
+   ```sh
+   export DB_HOST=your_mysql_host
+   export DB_PORT=3306
+   export DB_NAME=expense_tracker
+   export DB_USERNAME=your_username
+   export DB_PASSWORD=your_password
+   export JWT_SECRET=your_jwt_secret_key
+   export JWT_EXPIRATION=86400000
+   export PORT=8080
+   export DDL_AUTO=update
+   export SHOW_SQL=false
+   ```
 
-# Create MySQL database
-mysql -u root -p
-CREATE DATABASE expense_tracker;
-CREATE USER 'expense_user'@'localhost' IDENTIFIED BY 'your_password';
-GRANT ALL PRIVILEGES ON expense_tracker.* TO 'expense_user'@'localhost';
-FLUSH PRIVILEGES;
-exit;
+4. Build the project
+   ```sh
+   ./gradlew build
+   ```
+5. Run the application
+   ```sh
+   ./gradlew bootRun
+   ```
 
-# Configure application properties
-cp src/main/resources/application.properties.example src/main/resources/application.properties
-# Edit application.properties with your database credentials
+   Or run the JAR file directly:
+   ```sh
+   java -jar build/libs/expense-tracker-1.0.0.jar
+   ```
 
-# Install dependencies and build
-./gradlew clean build
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- API ENDPOINTS -->
+## API Endpoints
+
+### Authentication
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login and get JWT token |
+
+### Expenses (Requires Authentication)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/expenses` | Get all expenses (supports filtering) |
+| GET | `/api/expenses/{id}` | Get expense by ID |
+| POST | `/api/expenses` | Create a new expense |
+| PUT | `/api/expenses/{id}` | Update an expense |
+| DELETE | `/api/expenses/{id}` | Delete an expense |
+
+### Query Parameters for GET /api/expenses
+
+| Parameter | Description |
+|-----------|-------------|
+| `filter` | Predefined filter: `week`, `month`, `3months` |
+| `startDate` | Start date (ISO format: YYYY-MM-DD) |
+| `endDate` | End date (ISO format: YYYY-MM-DD) |
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+### Register a New User
+
+```bash
+curl -X POST http://localhost:8080/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "yourPassword123",
+    "name": "John Doe"
+  }'
 ```
 
-**Step-by-step breakdown:**
-1. The repository is cloned to your local machine
-2. A MySQL database named `expense_tracker` is created
-3. A dedicated database user with appropriate privileges is set up
-4. Application properties are configured with your database credentials
-5. Gradle downloads all dependencies and compiles the project
+### Login
 
-### Building
-
-To build the project for production:
-
-```shell
-# Clean previous builds and create a new build
-./gradlew clean build
-
-# Skip tests for faster builds (not recommended for production)
-./gradlew clean build -x test
-
-# Create a bootable JAR
-./gradlew bootJar
+```bash
+curl -X POST http://localhost:8080/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "password": "yourPassword123"
+  }'
 ```
 
-This creates an executable JAR file in `build/libs/expense-tracker-{version}.jar` that contains all dependencies and can be run standalone.
+### Create an Expense
 
-### Deploying / Publishing
-
-To deploy the application to a server:
-
-```shell
-# Build the production JAR
-./gradlew clean bootJar
-
-# Transfer to server (example using scp)
-scp build/libs/expense-tracker-*.jar user@server.com:/path/to/deployment/
-
-# On the server, run the application
-java -jar expense-tracker-*.jar --spring.profiles.active=prod
+```bash
+curl -X POST http://localhost:8080/api/expenses \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -d '{
+    "title": "Groceries",
+    "amount": 45.99,
+    "category": "FOOD",
+    "date": "2026-03-15",
+    "description": "Weekly grocery shopping"
+  }'
 ```
 
-## Versioning
+### Get Expenses (Last Week)
 
-This project uses [SemVer](http://semver.org/) for versioning. For available versions, see the [tags on this repository](https://github.com/ManoGuzman/expense-tracker/tags).
-
-## Configuration
-
-Configure the application through `src/main/resources/application.properties`:
-
-```properties
-# Database Configuration
-spring.datasource.url=jdbc:mysql://localhost:3306/expense_tracker
-spring.datasource.username=expense_user
-spring.datasource.password=your_password
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-# Hibernate Configuration
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-spring.jpa.properties.hibernate.format_sql=true
-
-# JWT Configuration
-jwt.secret=your_secret_key_here_min_256_bits
-jwt.expiration=86400000
-
-# Server Configuration
-server.port=8080
-server.servlet.context-path=/api
-
-# Logging
-logging.level.org.springframework=INFO
-logging.level.com.yourpackage=DEBUG
+```bash
+curl -X GET "http://localhost:8080/api/expenses?filter=week" \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
-**Environment-specific profiles:**
-- `application-dev.properties` - Development settings
-- `application-prod.properties` - Production settings
-- `application-test.properties` - Testing configuration
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Tests
 
-Run the test suite to ensure everything works correctly:
 
-**Test coverage includes:**
-- Unit tests for service layer business logic
-- Integration tests for repository/database operations
-- Controller tests for API endpoints
-- Security tests for authentication/authorization
+<!-- ROADMAP -->
+## Roadmap
 
-## API Reference
+- [x] User registration and login
+- [x] JWT authentication
+- [x] CRUD operations for expenses
+- [x] Date-based filtering (week, month, 3 months, custom range)
+- [x] Expense categories
+- [x] H2 database for development
+- [x] MySQL support for production
+- [x] Railway deployment
+- [ ] Add expense statistics and summaries
+- [ ] Add expense recurring transactions
+- [ ] Add export functionality (CSV/Excel)
+- [ ] Add multi-currency support
+- [ ] Add budget management
 
-## Database
+See the [open issues](https://github.com/ManoGuzman/expense-tracker-springboot/issues) for a full list of proposed features.
 
-**Database:** MySQL 8.0+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-**Relationships:**
-- One User has Many Expenses (One-to-Many)
-- Each Expense belongs to exactly One User
-- Cascade delete: When a user is deleted, all their expenses are also deleted
 
-**Download MySQL:** [MySQL Community Server](https://dev.mysql.com/downloads/mysql/)
 
-## Style Guide
+<!-- CONTRIBUTING -->
+## Contributing
 
-This project follows **Google Java Style Guide** with Spring Boot best practices.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-**Check code style:**
-```shell
-# Using Checkstyle plugin
-./gradlew checkstyleMain checkstyleTest
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-# Format code (if using Spotless)
-./gradlew spotlessApply
-```
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-**Key conventions:**
-- Use camelCase for variables and methods
-- Use PascalCase for class names
-- Use UPPER_SNAKE_CASE for constants
-- Keep methods focused and single-purpose
-- Write descriptive variable names
-- Add JavaDoc for public APIs
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Licensing
+### Top Contributors
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<a href="https://github.com/ManoGuzman/expense-tracker-springboot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ManoGuzman/expense-tracker-springboot" alt="contrib.rocks image" />
+</a>
 
----
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Manuel Guzman - [LinkedIn][linkedin-url] - manoguzman.dev@gmail.com
+
+Project Link: [https://github.com/ManoGuzman/expense-tracker-springboot](https://github.com/ManoGuzman/expense-tracker-springboot)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+* [JWT Documentation](https://jwt.io/)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+* [Shields.io](https://shields.io)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/ManoGuzman/expense-tracker-springboot.svg?style=for-the-badge
+[contributors-url]: https://github.com/ManoGuzman/expense-tracker-springboot/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/ManoGuzman/expense-tracker-springboot.svg?style=for-the-badge
+[forks-url]: https://github.com/ManoGuzman/expense-tracker-springboot/network/members
+[stars-shield]: https://img.shields.io/github/stars/ManoGuzman/expense-tracker-springboot.svg?style=for-the-badge
+[stars-url]: https://github.com/ManoGuzman/expense-tracker-springboot/stargazers
+[issues-shield]: https://img.shields.io/github/issues/ManoGuzman/expense-tracker-springboot.svg?style=for-the-badge
+[issues-url]: https://github.com/ManoGuzman/expense-tracker-springboot/issues
+[license-shield]: https://img.shields.io/github/license/ManoGuzman/expense-tracker-springboot.svg?style=for-the-badge
+[license-url]: https://github.com/ManoGuzman/expense-tracker-springboot/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/manuel-guzman-b87b841bb/
+
+<!-- Technology Badges -->
+[java-shield]: https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
+[java-url]: https://www.java.com/
+[spring-shield]: https://img.shields.io/badge/Spring%20Boot-3.2.0-6DB33F?style=for-the-badge&logo=springboot&logoColor=white
+[spring-url]: https://spring.io/projects/spring-boot
+[spring-security-url]: https://spring.io/projects/spring-security
+[jwt-url]: https://jwt.io/
+[mysql-url]: https://www.mysql.com/
+[h2-url]: https://www.h2database.com/
+[lombok-url]: https://projectlombok.org/
+[gradle-url]: https://gradle.org/
+
+<!-- Technology Names -->
+[Java]: https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
+[Spring Boot]: https://img.shields.io/badge/Spring%20Boot-3.2.0-6DB33F?style=for-the-badge&logo=springboot&logoColor=white
+[Spring Security]: https://img.shields.io/badge/Spring%20Security-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white
+[JWT]: https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white
+[MySQL]: https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white
+[H2]: https://img.shields.io/badge/H2-005572?style=for-the-badge&logo=h2&logoColor=white
+[Lombok]: https://img.shields.io/badge/Lombok-FF5722?style=for-the-badge&logo=lombok&logoColor=white
+[Gradle]: https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white

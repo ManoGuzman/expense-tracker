@@ -8,6 +8,9 @@ import com.expensetracker.exception.UnauthorizedException;
 import com.expensetracker.model.Expense;
 import com.expensetracker.model.User;
 import com.expensetracker.repository.ExpenseRepository;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -15,13 +18,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
- * Service for managing expense operations.
- * Handles business logic for expense CRUD operations and filtering.
+ * Service for managing expense operations. Handles business logic for expense CRUD operations and
+ * filtering.
  */
 @Slf4j
 @Service
@@ -38,18 +37,18 @@ public class ExpenseService {
    */
   private User getCurrentUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    
+
     if (authentication == null || !authentication.isAuthenticated()) {
       log.error("No authentication found in security context");
       throw new UnauthorizedException("User not authenticated");
     }
-    
+
     Object principal = authentication.getPrincipal();
     if (!(principal instanceof User)) {
       log.error("Principal is not an instance of User: {}", principal.getClass().getName());
       throw new UnauthorizedException("Invalid authentication principal");
     }
-    
+
     return (User) principal;
   }
 
@@ -68,7 +67,7 @@ public class ExpenseService {
         .expenseDate(expense.getExpenseDate())
         .build();
   }
-    
+
   /**
    * Retrieves all expenses for the current user.
    *
@@ -94,20 +93,21 @@ public class ExpenseService {
       log.error("Start date or end date is null");
       throw new InvalidInputException("Start date and end date are required");
     }
-    
+
     if (startDate.isAfter(endDate)) {
       log.error("Start date {} is after end date {}", startDate, endDate);
       throw new InvalidInputException("Start date must be before or equal to end date");
     }
-    
+
     User user = getCurrentUser();
-    log.info("Fetching expenses for user {} between {} and {}", user.getEmail(), startDate, endDate);
-    
+    log.info(
+        "Fetching expenses for user {} between {} and {}", user.getEmail(), startDate, endDate);
+
     return expenseRepository.findByUserAndDateRange(user, startDate, endDate).stream()
         .map(this::mapToResponse)
         .collect(Collectors.toList());
   }
-    
+
   /**
    * Retrieves expenses from the past week.
    *
@@ -140,7 +140,7 @@ public class ExpenseService {
     LocalDate startDate = endDate.minusMonths(3);
     return getExpensesByDateRange(startDate, endDate);
   }
-    
+
   /**
    * Creates a new expense for the current user.
    *
@@ -152,17 +152,18 @@ public class ExpenseService {
     User user = getCurrentUser();
     log.info("Creating expense for user: {}", user.getEmail());
 
-    Expense expense = Expense.builder()
-        .description(request.getDescription())
-        .amount(request.getAmount())
-        .category(request.getCategory())
-        .expenseDate(request.getExpenseDate())
-        .user(user)
-        .build();
+    Expense expense =
+        Expense.builder()
+            .description(request.getDescription())
+            .amount(request.getAmount())
+            .category(request.getCategory())
+            .expenseDate(request.getExpenseDate())
+            .user(user)
+            .build();
 
     expense = expenseRepository.save(expense);
     log.info("Successfully created expense with ID: {}", expense.getId());
-    
+
     return mapToResponse(expense);
   }
 
@@ -180,11 +181,14 @@ public class ExpenseService {
     User user = getCurrentUser();
     log.info("Updating expense {} for user: {}", id, user.getEmail());
 
-    Expense expense = expenseRepository.findById(id)
-        .orElseThrow(() -> {
-          log.error("Expense not found with ID: {}", id);
-          return new ResourceNotFoundException("Expense not found with ID: " + id);
-        });
+    Expense expense =
+        expenseRepository
+            .findById(id)
+            .orElseThrow(
+                () -> {
+                  log.error("Expense not found with ID: {}", id);
+                  return new ResourceNotFoundException("Expense not found with ID: " + id);
+                });
 
     if (!expense.getUser().getId().equals(user.getId())) {
       log.error("User {} not authorized to update expense {}", user.getEmail(), id);
@@ -198,10 +202,10 @@ public class ExpenseService {
 
     expense = expenseRepository.save(expense);
     log.info("Successfully updated expense with ID: {}", expense.getId());
-    
+
     return mapToResponse(expense);
   }
-    
+
   /**
    * Deletes an expense.
    *
@@ -214,11 +218,14 @@ public class ExpenseService {
     User user = getCurrentUser();
     log.info("Deleting expense {} for user: {}", id, user.getEmail());
 
-    Expense expense = expenseRepository.findById(id)
-        .orElseThrow(() -> {
-          log.error("Expense not found with ID: {}", id);
-          return new ResourceNotFoundException("Expense not found with ID: " + id);
-        });
+    Expense expense =
+        expenseRepository
+            .findById(id)
+            .orElseThrow(
+                () -> {
+                  log.error("Expense not found with ID: {}", id);
+                  return new ResourceNotFoundException("Expense not found with ID: " + id);
+                });
 
     if (!expense.getUser().getId().equals(user.getId())) {
       log.error("User {} not authorized to delete expense {}", user.getEmail(), id);
@@ -241,11 +248,14 @@ public class ExpenseService {
     User user = getCurrentUser();
     log.info("Fetching expense {} for user: {}", id, user.getEmail());
 
-    Expense expense = expenseRepository.findById(id)
-        .orElseThrow(() -> {
-          log.error("Expense not found with ID: {}", id);
-          return new ResourceNotFoundException("Expense not found with ID: " + id);
-        });
+    Expense expense =
+        expenseRepository
+            .findById(id)
+            .orElseThrow(
+                () -> {
+                  log.error("Expense not found with ID: {}", id);
+                  return new ResourceNotFoundException("Expense not found with ID: " + id);
+                });
 
     if (!expense.getUser().getId().equals(user.getId())) {
       log.error("User {} not authorized to view expense {}", user.getEmail(), id);

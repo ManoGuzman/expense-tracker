@@ -1,15 +1,13 @@
 package com.expensetracker.exception;
 
-/**
- * Exception thrown when input validation fails.
- */
+/** Exception thrown when input validation fails. */
 public class InvalidInputException extends RuntimeException {
-    
-    public InvalidInputException(String message) {
-        super(message);
-    }
-    
-    public InvalidInputException(String message, Throwable cause) {
-        super(message, cause);
-    }
+
+  public InvalidInputException(String message) {
+    super(message);
+  }
+
+  public InvalidInputException(String message, Throwable cause) {
+    super(message, cause);
+  }
 }

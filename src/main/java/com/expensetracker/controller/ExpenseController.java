@@ -4,18 +4,17 @@ import com.expensetracker.dto.ExpenseRequest;
 import com.expensetracker.dto.ExpenseResponse;
 import com.expensetracker.service.ExpenseService;
 import jakarta.validation.Valid;
+import java.time.LocalDate;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.List;
-
 /**
- * REST controller for managing expense resources.
- * Handles all HTTP requests related to expense operations.
+ * REST controller for managing expense resources. Handles all HTTP requests related to expense
+ * operations.
  */
 @RestController
 @RequestMapping("/expenses")
@@ -23,7 +22,7 @@ import java.util.List;
 public class ExpenseController {
 
   private final ExpenseService expenseService;
-    
+
   /**
    * Retrieves expenses with optional filtering.
    *
@@ -51,7 +50,7 @@ public class ExpenseController {
     }
     return ResponseEntity.ok(expenseService.getAllExpenses());
   }
-    
+
   /**
    * Retrieves a specific expense by ID.
    *

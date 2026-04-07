@@ -5,19 +5,18 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 /**
- * Service for handling JWT token operations including generation, validation, and extraction.
- * This service manages JWT tokens for user authentication and authorization.
+ * Service for handling JWT token operations including generation, validation, and extraction. This
+ * service manages JWT tokens for user authentication and authorization.
  */
 @Service
 public class JwtService {
@@ -27,7 +26,7 @@ public class JwtService {
 
   @Value("${jwt.expiration}")
   private long jwtExpiration;
-    
+
   /**
    * Extracts the username (subject) from the JWT token.
    *
@@ -50,7 +49,7 @@ public class JwtService {
     Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
   }
-    
+
   /**
    * Generates a JWT token for the given user details.
    *
@@ -71,7 +70,7 @@ public class JwtService {
   public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
     return buildToken(extraClaims, userDetails, jwtExpiration);
   }
-    
+
   private String buildToken(
       Map<String, Object> extraClaims, UserDetails userDetails, long expiration) {
     return Jwts.builder()
@@ -82,7 +81,7 @@ public class JwtService {
         .signWith(getSignInKey(), SignatureAlgorithm.HS256)
         .compact();
   }
-    
+
   /**
    * Validates if the token is valid for the given user details.
    *
@@ -102,13 +101,9 @@ public class JwtService {
   private Date extractExpiration(String token) {
     return extractClaim(token, Claims::getExpiration);
   }
-    
+
   private Claims extractAllClaims(String token) {
-    return Jwts.parser()
-        .setSigningKey(getSignInKey())
-        .build()
-        .parseClaimsJws(token)
-        .getBody();
+    return Jwts.parser().setSigningKey(getSignInKey()).build().parseClaimsJws(token).getBody();
   }
 
   private Key getSignInKey() {
