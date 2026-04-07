@@ -22,19 +22,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Add Spotless plugin
-        shell: bash
-        run: |
-          if ! grep -q "id 'com.diffplug.spotless'" build.gradle; then
-            echo "plugins { id 'com.diffplug.spotless' version '6.19.0' }" >> build.gradle
-            echo "" >> build.gradle
-            echo "spotless {" >> build.gradle
-            echo "    java {" >> build.gradle
-            echo "        googleJavaFormat()" >> build.gradle
-            echo "    }" >> build.gradle
-            echo "}" >> build.gradle
-          fi
-
       - name: Run Spotless check
         run: ./gradlew spotlessCheck
 
